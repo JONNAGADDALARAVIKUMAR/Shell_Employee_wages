@@ -2,26 +2,37 @@
 wageHour=20
 dayHours=8
 PartHours=4
+present=0
+absent=0
+wage=0
 echo -e "\n\n\t\t\tWelcome to Employee Wage Computation Program"
-randValue=$(($RANDOM%10))
 echo -n -e "\n\n\tSelect type of Employee\n\t\t1.Full time Emloyee\n\t\t2.Full time Employee\n\tOPTION : "
 read empType
+
+for ((i=0; i<20 ;i++))
+do
+randValue=$(($RANDOM%10))
 case $empType in
 1)
-if [[ $randValue -le 6 ]]
+if [[ $randValue -le 5 ]]
 then
-echo -e "\n\tFull time Employee is present"
-echo -e "\n\tWage : "$(($wageHour*$dayHours))
+((present++))
+((wage+=$(($wageHour*$dayHours))))
 else
-echo -e "\n\tFull time Employee is absent"
+((absent++))
 fi ;;
 
 2)
-if [[ $randValue -le 6 ]]
+if [[ $randValue -le 5 ]]
 then
-echo -e "\n\tPart time Employee is present"
-echo -e "\n\tWage : "$(($wageHour*$PartHours))
+((present++))
+((wage+=$(($wageHour*$PartHours))))
 else
-echo -e "\n\tPart time Employee is absent"
+((absent++))
+
 fi ;;
 esac
+done
+echo -e "\n\tNo of days Present : "$present
+echo -e "\n\tNo of days Absent : "$absent
+echo -e "\n\tTotal wage per month : "$wage
